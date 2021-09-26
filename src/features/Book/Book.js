@@ -1,23 +1,28 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { ShoppingCart } from '@mui/icons-material'
-import { convertDollar, getYearFromDate, formatDate } from '../../utilities/Helper'
+import { convertDollar, getYearFromDate, formatDate, formatPrice } from '../../utilities/Helper'
 import { addToCart } from '../cart/CartSlice'
 import { decreaseStock } from './BookSlice'
 
 const Book = ({ book, count }) => {
   const dispatch = useDispatch()
-  const [cart, setCart] = useState(1)
+  const [cart, setCart] = useState('1')
 
   const add = () => {
-    if (cart > count) {
+    if (isNaN(parseInt(cart))) {
+      alert('Quantity must be a Number!')
+      return
+    }
+    let cartCount = parseInt(cart)
+    if (cartCount > count) {
       alert('Selected Quantity is greater than stock quantity!')
       return
     }
 
     const cartObj = {
       'book': book,
-      'count': cart,
+      'count': cartCount,
     }
 
     dispatch(addToCart(cartObj))
@@ -34,7 +39,7 @@ const Book = ({ book, count }) => {
         <div className="card-body">
 
           <h5 className="card-title text-center">{book.name} ({getYearFromDate(book.published_date)})</h5>
-          <p className="h6 text-success text-center mt-auto mb-auto"> Rs.{convertDollar(book.price)}</p>
+          <p className="h6 text-success text-center mt-auto mb-auto"> Rs.{formatPrice(convertDollar(book.price))}</p>
           <div className="card-text fw-light mt-2">
             Author: {book.author}<br />
             <div className="d-flex">
@@ -42,15 +47,17 @@ const Book = ({ book, count }) => {
               <span className="text-truncate ms-2"> {book.genre} </span><br />
             </div>
             Stock: {count}<br />
-            <span className="text-truncate" style={{ fontSize: "0.8rem" }} >Published on: {formatDate(book.published_date)} </span><br />
+            <span className="text-truncate" >Published on: {formatDate(book.published_date)} </span><br />
           </div>
-          <div className="row mt-2">
-            <div className="col">
-              <input type="number" className="form-control text-center"
-                value={cart} min="1" max={count} onChange={e => setCart(parseInt(e.target.value))}
+          <div className="d-flex mt-2">
+            <span className="fw-light mt-auto mb-auto">Qty: </span>
+            <div className="ms-1">
+              <input type="number" className="form-control text-center align-middle"
+                value={cart} min="1" max={count}
+                onChange={e => setCart(e.target.value.trim())}
               /></div>
-            <button className="btn btn-primary ms-auto col"
-              onClick={add}>Add &nbsp; <ShoppingCart /></button>
+            <button className="btn btn-primary ms-auto"
+              onClick={add} disabled={count === 0}><ShoppingCart /></button>
           </div>
 
         </div>

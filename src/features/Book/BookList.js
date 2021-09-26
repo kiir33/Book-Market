@@ -12,10 +12,10 @@ const BookList = () => {
   const state = useSelector(state => state.books)
 
   useEffect(() => {
-    dispatch(FetchBooks())
-  }, [dispatch])
-
-
+    if (state.bookList.length === 0) {
+      dispatch(FetchBooks())
+    }
+  })
 
   if (state.loading) {
     return (
@@ -45,7 +45,7 @@ const BookList = () => {
           filterKey !== '' &&
           <div className="row">
             {
-              state.bookList.filter(item => item.book.genre.includes(filterKey)).forEach(item => (
+              state.bookList.filter(item => item.book.genre.includes(filterKey)).map(item => (
                 <Book key={item.book.id} book={item.book} count={item.count} />
               ))
             }
@@ -67,6 +67,5 @@ const BookList = () => {
     )
   }
 }
-
 
 export default BookList

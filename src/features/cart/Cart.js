@@ -1,9 +1,12 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { convertDollar } from '../../utilities/Helper'
+import { useSelector, useDispatch } from 'react-redux'
+import { convertDollar, formatPrice } from '../../utilities/Helper'
+import { resetStock } from '../Book/BookSlice'
 import CartItem from './CartItem'
+import { removeFromCart } from './CartSlice'
 
 const Cart = () => {
+  const dispatch = useDispatch()
   const state = useSelector(state => state.cart)
 
   const calculateTotal = (cartList) => {
@@ -16,26 +19,50 @@ const Cart = () => {
     return convertDollar('$' + totalCost)
   }
 
+  const checkout = () => {
+    if (window.confirm('Do you want to checkout now?')) {
+
+      let idList = []
+      state.cartList.map(item => {
+        idList.push(item.book.id)
+        return item
+      })
+      dispatch(removeFromCart(idList))
+      dispatch(resetStock(idList))
+    }
+  }
+
   if (state.cartList.length === 0) {
     return (
-      <div className="p-5 text-center">
-        <i className="fas fa-shopping-basket h1 text-secondary mt-5"></i>
-        <p className="h3 text-secondary mt-4">No Items!</p>
+      <div
+        style={{
+          fontSize: '2rem',
+          paddingTop: '15rem',
+          textAlign: 'center',
+        }}>
+        <p className="text-secondary p-4">Cart Empty!</p>
       </div>
     )
   }
   return (
-    <div >
-      <div className="bg-body shadow-sm p-4 d-flex">
-        <span className="h4 m-auto"><span className="fw-light">Total amount:</span> NRs. {calculateTotal(state.cartList)}</span>
-        <button className="btn btn-lg btn-success col-3">Check Out &nbsp;<i className="fas fa-arrow-circle-right" /> </button>
+    <div className="pt-2">
+      <div className="d-flex bg-body shadow-sm text-center py-2 px-4">
+        <span className="h4 ms-auto my-auto me-4"><span className="fw-light">Total amount:</span> Rs. {formatPrice(calculateTotal(state.cartList))}</span>
+
+        <button onClick={checkout}
+          className="btn btn-lg btn-success px-4">
+          Check Out<i className="fas fa-arrow-circle-right ms-2" />
+        </button>
       </div >
-      <div className="row mt-4">
-        {
-          state.cartList.map(item => (
-            <CartItem key={item.book.id} book={item.book} count={item.count} />
-          ))
-        }
+
+      <div className="container py-2">
+        <div className="row">
+          {
+            state.cartList.map(item => (
+              <CartItem key={item.book.id} book={item.book} count={item.count} />
+            ))
+          }
+        </div>
       </div>
     </div>
   )

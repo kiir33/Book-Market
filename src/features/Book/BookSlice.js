@@ -16,24 +16,29 @@ export const FetchBooks = createAsyncThunk(
 )
 
 const saveToRedux = (state, action) => {
+  if (state.bookList.length > 0) {
+    return
+  }
   let bookList = action.payload
 
-  bookList.forEach(book => {
+  bookList.map(book => {
     state.bookList.push({
       'book': book,
       'count': book.stock
     })
     if (book.genre.includes('|')) {
       let genres = book.genre.split('|')
-      genres.forEach(g => {
+      genres.map(g => {
         if (!state.genreList.includes(g)) {
           state.genreList.push(g)
         }
+        return g
       })
 
     } else if (!state.genreList.includes(book.genre)) {
       state.genreList.push(book.genre)
     }
+    return book
   })
 }
 
@@ -49,11 +54,13 @@ const BookSlice = createSlice({
   reducers: {
     resetStock: (state, action) => {
       const bookIds = action.payload
-      bookIds.forEach(bookId => {
+      console.log('removed ', bookIds.length, 'book(s) from cart');
+      bookIds.map(bookId => {
         const bookIndex = state.bookList.findIndex(item => item.book.id === bookId)
         if (bookIndex !== -1) {
-          state.bookList[bookIndex].count += state.bookList[bookIndex].book.stock
+          state.bookList[bookIndex].count = state.bookList[bookIndex].book.stock
         }
+        return bookId
       });
 
     },
@@ -61,7 +68,7 @@ const BookSlice = createSlice({
       const newCartItem = action.payload
       const bookIndex = state.bookList.findIndex(item =>
         item.book.id === newCartItem.book.id)
-      if (bookIndex !== -1) {
+      if (bookIndex !== -1 && state.bookList[bookIndex].count > 0) {
         state.bookList[bookIndex].count -= newCartItem.count
       }
     },

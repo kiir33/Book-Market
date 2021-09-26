@@ -10,18 +10,20 @@ const CartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const newCartItem = action.payload
-      const cartIndex = state.cartList.findIndex(item =>
-        item.book.id === newCartItem.book.id)
-      if (cartIndex < 0) {
-        state.cartList.push(newCartItem)
+      if (state.cartList.length < 5) {
+        const newCartItem = action.payload
+        const cartIndex = state.cartList.findIndex(item => item.book.id === newCartItem.book.id)
+        if (cartIndex < 0) {
+          state.cartList.push(newCartItem)
+        } else {
+          state.cartList[cartIndex].count += parseInt(newCartItem.count)
+        }
       } else {
-        console.log(typeof state.cartList[cartIndex].count);
-        state.cartList[cartIndex].count += parseInt(newCartItem.count)
+        alert('Cannot add more than 5 different books!')
       }
     },
     removeFromCart: (state, action) => {
-      const tempList = state.cartList.filter(item => item.book.id !== action.payload)
+      const tempList = state.cartList.filter(item => !action.payload.includes(item.book.id))
       state.cartList = tempList
     }
   },

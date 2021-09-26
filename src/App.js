@@ -6,15 +6,14 @@ import Cart from './features/cart/Cart'
 
 function App() {
   return (
-    <div>
+    <div className="bg-light" style={{ height: "100vh" }}>
       <Router>
-        <div className="bg-light" style={{ height: "100vh" }}>
-          <Navbar />
+        <Navbar />
+        <div className="mt-5">
           <Switch>
             <Route exact path="/" >
               <BookList />
             </Route>
-
             <Route path="/cart" >
               <Cart />
             </Route>
