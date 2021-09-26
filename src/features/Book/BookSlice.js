@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { act } from 'react-dom/test-utils'
 
 export const FetchBooks = createAsyncThunk(
   'get/book',
@@ -9,9 +8,7 @@ export const FetchBooks = createAsyncThunk(
       let url = "https://book-set-task.herokuapp.com/api/list_books"
       const books = await axios.get(url)
       const { data } = books
-
       return data
-
     } catch (error) {
       return error
     }
@@ -19,12 +16,23 @@ export const FetchBooks = createAsyncThunk(
 )
 
 const addGenre = (state, action) => {
-  // let newGenres = action.payload
-  // newGenres.map(genre => {
-  //   if (!state.genreList.includes(genre)) {
-  //     state.genreList.push(genre)
-  //   }
-  // })
+  let bookList = action.payload
+
+  bookList.map(book => {
+    if (book.genre.includes('|')) {
+      let genres = book.genre.split('|')
+      genres.map(g => {
+        if (!state.genreList.includes(g)) {
+          state.genreList.push(g)
+        }
+        return g
+      })
+
+    } else if (!state.genreList.includes(book.genre)) {
+      state.genreList.push(book.genre)
+    }
+    return book
+  })
 }
 
 const initialState = {
@@ -36,7 +44,11 @@ const initialState = {
 const BookSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {},
+  reducers: {
+    setGenre: (state, action) => {
+      state.genreList.push(action.payload)
+    }
+  },
   extraReducers: {
     [FetchBooks.pending]: (state) => {
       state.loading = true;
@@ -51,5 +63,7 @@ const BookSlice = createSlice({
     },
   }
 })
+
+export const { setGenre } = BookSlice.actions
 
 export default BookSlice.reducer;

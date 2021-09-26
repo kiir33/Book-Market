@@ -1,22 +1,19 @@
 import React from 'react'
-import { AppBar, Toolbar, Typography, IconButton, Badge } from '@mui/material'
+import { Link } from 'react-router-dom'
 import { ShoppingCart } from '@mui/icons-material'
 
 const Navbar = () => {
   return (
     <div className="sticky-top">
-      <AppBar position="static">
-        <Toolbar variant="dense">
-          <Typography variant="h6" color="inherit" component="div" sx={{ flexGrow: 1 }} >
-            Kiran Book Store
-          </Typography>
-          <IconButton edge="end" color="inherit" aria-label="show cart items count" >
-            <Badge badgeContent={4} color="error">
-              <ShoppingCart />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+      <nav className="navbar navbar-dark bg-primary ps-4 pe-4">
+        <Link className="navbar-brand" to="/">Book Market</Link>
+
+        <div className="navbar-nav ms-auto">
+          <Link className="nav-item nav-link active" to="/cart">
+            <ShoppingCart />&nbsp;&nbsp;Cart
+          </Link>
+        </div>
+      </nav>
     </div>
   )
 }
