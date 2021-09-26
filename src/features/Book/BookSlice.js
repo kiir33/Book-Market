@@ -15,23 +15,25 @@ export const FetchBooks = createAsyncThunk(
   }
 )
 
-const addGenre = (state, action) => {
+const saveToRedux = (state, action) => {
   let bookList = action.payload
 
-  bookList.map(book => {
+  bookList.forEach(book => {
+    state.bookList.push({
+      'book': book,
+      'count': book.stock
+    })
     if (book.genre.includes('|')) {
       let genres = book.genre.split('|')
-      genres.map(g => {
+      genres.forEach(g => {
         if (!state.genreList.includes(g)) {
           state.genreList.push(g)
         }
-        return g
       })
 
     } else if (!state.genreList.includes(book.genre)) {
       state.genreList.push(book.genre)
     }
-    return book
   })
 }
 
@@ -45,18 +47,31 @@ const BookSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    setGenre: (state, action) => {
-      state.genreList.push(action.payload)
-    }
+    resetStock: (state, action) => {
+      const bookIds = action.payload
+      bookIds.forEach(bookId => {
+        const bookIndex = state.bookList.findIndex(item => item.book.id === bookId)
+        if (bookIndex !== -1) {
+          state.bookList[bookIndex].count += state.bookList[bookIndex].book.stock
+        }
+      });
+
+    },
+    decreaseStock: (state, action) => {
+      const newCartItem = action.payload
+      const bookIndex = state.bookList.findIndex(item =>
+        item.book.id === newCartItem.book.id)
+      if (bookIndex !== -1) {
+        state.bookList[bookIndex].count -= newCartItem.count
+      }
+    },
   },
   extraReducers: {
     [FetchBooks.pending]: (state) => {
       state.loading = true;
     },
     [FetchBooks.fulfilled]: (state, action) => {
-      
-      state.bookList = action.payload;
-      addGenre(state, action)
+      saveToRedux(state, action)
       state.loading = false;
     },
     [FetchBooks.rejected]: (state) => {
@@ -65,6 +80,6 @@ const BookSlice = createSlice({
   }
 })
 
-export const { setGenre } = BookSlice.actions
+export const { resetStock, decreaseStock } = BookSlice.actions
 
 export default BookSlice.reducer;

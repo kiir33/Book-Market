@@ -45,8 +45,8 @@ const BookList = () => {
           filterKey !== '' &&
           <div className="row">
             {
-              state.bookList.filter(book => book.genre.includes(filterKey)).map(item => (
-                <Book key={item.id} book={item} />
+              state.bookList.filter(item => item.book.genre.includes(filterKey)).forEach(item => (
+                <Book key={item.book.id} book={item.book} count={item.count} />
               ))
             }
           </div>
@@ -57,7 +57,7 @@ const BookList = () => {
           <div className="row">
             {
               state.bookList.map(item => (
-                <Book key={item.id} book={item} />
+                <Book key={item.book.id} book={item.book} count={item.count} />
               ))
             }
           </div>

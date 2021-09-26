@@ -11,6 +11,7 @@ const Cart = () => {
     cartList.map(item => {
       let price = item.book.price.replace('$', '')
       totalCost += price * item.count
+      return item
     })
     return convertDollar('$' + totalCost)
   }

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+
 const initialState = {
   cartList: [],
 }
@@ -15,7 +16,8 @@ const CartSlice = createSlice({
       if (cartIndex < 0) {
         state.cartList.push(newCartItem)
       } else {
-        state.cartList[cartIndex].count += 1
+        console.log(typeof state.cartList[cartIndex].count);
+        state.cartList[cartIndex].count += parseInt(newCartItem.count)
       }
     },
     removeFromCart: (state, action) => {

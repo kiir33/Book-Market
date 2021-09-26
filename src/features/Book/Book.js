@@ -3,14 +3,14 @@ import { useDispatch } from 'react-redux'
 import { ShoppingCart } from '@mui/icons-material'
 import { convertDollar, getYearFromDate, formatDate } from '../../utilities/Helper'
 import { addToCart } from '../cart/CartSlice'
+import { decreaseStock } from './BookSlice'
 
-const Book = ({ book }) => {
+const Book = ({ book, count }) => {
   const dispatch = useDispatch()
-  const [stock, setStock] = useState(book.stock)
   const [cart, setCart] = useState(1)
 
   const add = () => {
-    if (cart > stock) {
+    if (cart > count) {
       alert('Selected Quantity is greater than stock quantity!')
       return
     }
@@ -19,17 +19,11 @@ const Book = ({ book }) => {
       'book': book,
       'count': cart,
     }
+
     dispatch(addToCart(cartObj))
+    dispatch(decreaseStock(cartObj))
 
-    setStock(stock - cart)
     setCart(1)
-  }
-
-  const changeQty = (val, max) => {
-    let x = cart + val
-    if (x > max || x < 0)
-      return
-    setCart(x)
   }
 
   return (
@@ -47,23 +41,16 @@ const Book = ({ book }) => {
               <span >Genre: </span>
               <span className="text-truncate ms-2"> {book.genre} </span><br />
             </div>
-            Stock: {stock}<br />
+            Stock: {count}<br />
             <span className="text-truncate" style={{ fontSize: "0.8rem" }} >Published on: {formatDate(book.published_date)} </span><br />
           </div>
           <div className="row mt-2">
             <div className="col">
               <input type="number" className="form-control text-center"
-                value={cart} min="1" max={stock} onChange={e => setCart(e.target.value)}
+                value={cart} min="1" max={count} onChange={e => setCart(parseInt(e.target.value))}
               /></div>
             <button className="btn btn-primary ms-auto col"
               onClick={add}>Add &nbsp; <ShoppingCart /></button>
-          </div>
-
-          <div className="d-flex">
-            <button className="btn btn-outline-danger col-2 ms-auto" onClick={() => changeQty(-1, stock)}>-</button>
-
-            <button className="btn btn-outline-success col-2 me-auto" onClick={() => changeQty(1, stock)}>+</button>
-
           </div>
 
         </div>

@@ -2,6 +2,7 @@ import { DeleteForeverOutlined } from '@mui/icons-material'
 import { useDispatch } from 'react-redux'
 import { convertDollar, getYearFromDate } from '../../utilities/Helper'
 import { removeFromCart } from './CartSlice'
+import { resetStock } from '../Book/BookSlice'
 
 
 const CartItem = ({ book, count }) => {
@@ -9,6 +10,7 @@ const CartItem = ({ book, count }) => {
 
   const remove = () => {
     dispatch(removeFromCart(book.id))
+    dispatch(resetStock(book.id))
   }
 
   return (
