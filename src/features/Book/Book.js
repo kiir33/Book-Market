@@ -23,8 +23,13 @@ const Book = ({ book }) => {
 
     setStock(stock - cart)
     setCart(1)
+  }
 
-
+  const changeQty = (val, max) => {
+    let x = cart + val
+    if (x > max || x < 0)
+      return
+    setCart(x)
   }
 
   return (
@@ -53,6 +58,14 @@ const Book = ({ book }) => {
             <button className="btn btn-primary ms-auto col"
               onClick={add}>Add &nbsp; <ShoppingCart /></button>
           </div>
+
+          <div className="d-flex">
+            <button className="btn btn-outline-danger col-2 ms-auto" onClick={() => changeQty(-1, stock)}>-</button>
+
+            <button className="btn btn-outline-success col-2 me-auto" onClick={() => changeQty(1, stock)}>+</button>
+
+          </div>
+
         </div>
       </div>
     </div>

@@ -54,6 +54,7 @@ const BookSlice = createSlice({
       state.loading = true;
     },
     [FetchBooks.fulfilled]: (state, action) => {
+      
       state.bookList = action.payload;
       addGenre(state, action)
       state.loading = false;
