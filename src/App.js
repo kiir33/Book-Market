@@ -1,25 +1,30 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './utilities/Navbar'
 import BookList from './features/Book/BookList'
 import Cart from './features/cart/Cart'
+import { useState } from 'react';
 
 function App() {
+  const [cartVisible, setCartVisible] = useState(false)
+
+  const toggleCart = () => {
+    setCartVisible(!cartVisible)
+  }
+
   return (
-    <div className="bg-light" style={{ height: "100vh" }}>
-      <Router>
-        <Navbar />
-        <div className="mt-5">
-          <Switch>
-            <Route exact path="/" >
-              <BookList />
-            </Route>
-            <Route path="/cart" >
-              <Cart />
-            </Route>
-          </Switch>
+    <div style={{ position: 'relative', minHeight: "100%" }}>
+      {cartVisible &&
+        <div>
+          <div className="blackOverlay" onClick={toggleCart}></div>
+          <div className="cartOverlay"><Cart /></div>
         </div>
-      </Router>
+      }
+      <Navbar toggle={toggleCart} />
+
+      <div className="mt-5">
+        <div className="col-12"><BookList /></div>
+      </div>
+
     </div>
   );
 }

@@ -12,3 +12,38 @@ code {
     monospace;
 }
 
+.cartOverlay{
+  position: absolute;
+  z-index: 4;
+  background-color: #05386b;
+  border: 1px solid gray;
+  right: 0;
+  color: #5cdb95;
+  width: 50%;
+  overflow: hidden;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.blackOverlay{
+  width: 100%;
+  min-height: 100%;
+  position: absolute;
+  z-index: 3;
+  background-color: #161616a1;
+}
+
+
+.bgBlue{
+  background-color: #05386b;
+}
+
+.textBlue{
+  color: #05386b;
+}
+
+@media screen and (max-width: 525px){
+  .cartOverlay{
+    width: 80%;
+  }
+}

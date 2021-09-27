@@ -3,25 +3,24 @@ import { Link } from 'react-router-dom'
 import { ShoppingCart } from '@mui/icons-material'
 import { useSelector } from 'react-redux'
 
-const Navbar = () => {
+const Navbar = ({ toggle }) => {
   const state = useSelector(state => state.cart)
   return (
-    <nav className="fixed-top navbar navbar-dark bg-primary ps-4 pe-4">
-      <Link className="navbar-brand" to="/">Book Market</Link>
+    <nav className="fixed-top navbar bg-light ps-4 pe-4 border">
+      <span className="textBlue h3 fw-bolder" to="/">Book Market</span>
 
       <div className="navbar-nav ms-auto">
-        <Link className="nav-item nav-link active" to="/cart">
-          Cart&nbsp;&nbsp;<ShoppingCart />
+        <a className="nav-item nav-link active" to="/cart" onClick={toggle}>
+          <ShoppingCart className="textBlue" />
 
           {state.cartList.length !== 0 && (
             <span className="position-absolute top-2 start-2 translate-middle badge rounded-pill bg-danger">
               {state.cartList.length}
             </span>
           )}
-
-
-        </Link>
+        </a>
       </div>
+
     </nav>
   )
 }

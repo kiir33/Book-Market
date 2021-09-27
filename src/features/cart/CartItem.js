@@ -32,7 +32,7 @@ const CartItem = ({ book, count }) => {
   }
 
   return (
-    <div className="col-sm-5 col-md-4 col-lg-3 p-2">
+    <div className="col-sm-11 col-md-6 p-3" style={{ color: '#212121' }}>
       <div className="card shadow-sm ">
 
         <img src={book.image} alt="" className="card-img-top" style={{ aspectRatio: "2/1" }} />
@@ -46,19 +46,19 @@ const CartItem = ({ book, count }) => {
               <span >Genre: </span>
               <span className="text-truncate ms-2"> {book.genre} </span><br />
             </div>
-            <div className="d-flex align-middle my-2s">
+            <div className="d-flex align-middle my-2">
               <span className="my-auto me-auto">In Cart: <span className="mx-2 text-primary blockquote">{count}</span></span>
-              <button className="btn btn-danger me-2 rounded-circle"
-                style={{ width: '2.5rem', height: '2.5rem' }}
+              <button className="btn btn-sm btn-outline-danger me-2 rounded-circle"
+                style={{ width: '2rem', height: '2rem' }}
                 onClick={() => changeStock(-1)}>-</button>
-              <button className="btn btn-success rounded-circle"
-                style={{ width: '2.5rem', height: '2.5rem' }}
+              <button className="btn btn-sm btn-outline-success rounded-circle"
+                style={{ width: '2rem', height: '2rem' }}
                 disabled={count + 1 > book.stock}
                 onClick={() => changeStock(1)}>+</button>
             </div>
             Subtotal: <span className="text-success"> Rs.{formatPrice(convertDollar(book.price) * count)}</span>
           </div>
-          <button className="btn btn-danger col-12 mt-2"
+          <button className="btn btn-outline-danger col-12 mt-2"
             onClick={remove}>Remove <DeleteForeverOutlined /> </button>
         </div>
       </div>

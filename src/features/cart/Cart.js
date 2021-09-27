@@ -37,23 +37,25 @@ const Cart = () => {
       <div
         style={{
           fontSize: '2rem',
-          paddingTop: '15rem',
+          paddingTop: '12rem',
           textAlign: 'center',
         }}>
-        <p className="text-secondary p-4">Cart Empty!</p>
+        <p className="text-light p-4">Cart Empty!</p>
       </div>
     )
   }
   return (
     <div className="pt-2">
-      <div className="d-flex bg-body shadow-sm text-center py-2 px-4">
-        <span className="h4 ms-auto my-auto me-4"><span className="fw-light">Total amount:</span> Rs. {formatPrice(calculateTotal(state.cartList))}</span>
+      <div className="row text-light text-center pt-3 px-4">
+        <span className="fs-5 fw-bold m-auto col-sm-11 col-md-5"><span className="fw-light">Total amount:</span> Rs. {formatPrice(calculateTotal(state.cartList))}</span>
 
         <button onClick={checkout}
-          className="btn btn-lg btn-success px-4">
-          Check Out<i className="fas fa-arrow-circle-right ms-2" />
+          className="btn btn-light textBlue col-sm-11 col-md-5 px-4">
+          Clear Cart<i className="fas fa-times-circle ms-2" />
         </button>
       </div >
+
+      <hr />
 
       <div className="container py-2">
         <div className="row">

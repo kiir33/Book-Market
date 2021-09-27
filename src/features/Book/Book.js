@@ -32,7 +32,7 @@ const Book = ({ book, count }) => {
   }
 
   return (
-    <div className="col-sm-5 col-md-4 col-lg-3 m-auto p-2">
+    <div className="col-sm-12 col-md-6 col-lg-3 m-auto p-2">
       <div className="card shadow-sm ">
 
         <img src={book.image} alt="" className="card-img-top" style={{ aspectRatio: "2/1" }} />
@@ -56,7 +56,7 @@ const Book = ({ book, count }) => {
                 value={cart} min="1" max={count}
                 onChange={e => setCart(e.target.value.trim())}
               /></div>
-            <button className="btn btn-primary ms-auto"
+            <button className="btn btn-smbtn-primary ms-auto bgBlue text-light"
               onClick={add} disabled={count === 0}><ShoppingCart /></button>
           </div>
 

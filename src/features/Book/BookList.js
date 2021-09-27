@@ -33,7 +33,7 @@ const BookList = () => {
   } else {
 
     return (
-      <div className="container pt-4">
+      <div className="p-4 mx-4">
 
         {
           state.genreList.length !== 0 && (
