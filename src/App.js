@@ -16,15 +16,13 @@ function App() {
       {cartVisible &&
         <div>
           <div className="blackOverlay" onClick={toggleCart}></div>
-          <div className="cartOverlay"><Cart /></div>
+          <div className="cartOverlay"><Cart toggleCart={toggleCart} /></div>
         </div>
       }
-      <div>
-        <Navbar toggle={toggleCart} />
+      <Navbar toggle={toggleCart} />
 
-        <div className="mt-4">
-          <div className="col-12"><BookList /></div>
-        </div>
+      <div className="mt-4 overflow-hidden">
+        <div className="col-12"><BookList /></div>
       </div>
 
     </div>

@@ -5,7 +5,7 @@ import { resetStock } from '../Book/BookSlice'
 import CartItem from './CartItem'
 import { removeFromCart } from './CartSlice'
 
-const Cart = () => {
+const Cart = ({toggleCart}) => {
   const dispatch = useDispatch()
   const state = useSelector(state => state.cart)
 
@@ -40,14 +40,17 @@ const Cart = () => {
     )
   }
   return (
-    <div className="pt-4">
-      <div className="row text-light text-center pt-3 px-4">
-        <p className="h4 p-2">Cart</p><hr />
+    <div>
+      <div className="row text-light text-center px-4">
+        <i className="fas fs-3 fw-light fa-chevron-right col-1 my-auto" 
+        onClick={toggleCart}/>
+        <p className="col-10 h4 p-2">Cart</p>
+        <hr />
 
         <span className="fs-5 fw-bold m-auto col-sm-11 col-md-5"><span className="fw-light">Total amount:</span> Rs. {formatPrice(calculateTotal(state.cartList))}</span>
 
         <button onClick={checkout}
-          className="btn btn-light textBlue col-sm-11 col-md-5">
+          className="btn btn-outline-light col-sm-11 col-md-5">
           Clear Cart<i className="fas fa-times-circle ms-2" />
         </button>
         <hr className="mt-3" />

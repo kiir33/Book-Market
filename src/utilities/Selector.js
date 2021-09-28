@@ -9,7 +9,7 @@ const Selector = ({ genreList, setFilter }) => {
 
   return (
     <div className="col-lg-4 col-md-6 col-xs-10 my-4">
-      <select className="form-select" aria-label="Select Genre"
+      <select className="form-select textBlue" aria-label="Select Genre"
         onChange={e => handleChange(e)}>
         <option value="">Select Genre</option>
         {
