@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/Book-Market/static/css/main.905be9fb.chunk.css",
-    "main.js": "/Book-Market/static/js/main.e5305d03.chunk.js",
-    "main.js.map": "/Book-Market/static/js/main.e5305d03.chunk.js.map",
+    "main.css": "/Book-Market/static/css/main.f2745e36.chunk.css",
+    "main.js": "/Book-Market/static/js/main.63b7d7db.chunk.js",
+    "main.js.map": "/Book-Market/static/js/main.63b7d7db.chunk.js.map",
     "runtime-main.js": "/Book-Market/static/js/runtime-main.ff9aba5c.js",
     "runtime-main.js.map": "/Book-Market/static/js/runtime-main.ff9aba5c.js.map",
     "static/js/2.13c5bbe3.chunk.js": "/Book-Market/static/js/2.13c5bbe3.chunk.js",
     "static/js/2.13c5bbe3.chunk.js.map": "/Book-Market/static/js/2.13c5bbe3.chunk.js.map",
     "index.html": "/Book-Market/index.html",
-    "static/css/main.905be9fb.chunk.css.map": "/Book-Market/static/css/main.905be9fb.chunk.css.map",
+    "static/css/main.f2745e36.chunk.css.map": "/Book-Market/static/css/main.f2745e36.chunk.css.map",
     "static/js/2.13c5bbe3.chunk.js.LICENSE.txt": "/Book-Market/static/js/2.13c5bbe3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ff9aba5c.js",
     "static/js/2.13c5bbe3.chunk.js",
-    "static/css/main.905be9fb.chunk.css",
-    "static/js/main.e5305d03.chunk.js"
+    "static/css/main.f2745e36.chunk.css",
+    "static/js/main.63b7d7db.chunk.js"
   ]
 }
