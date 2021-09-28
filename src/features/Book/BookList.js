@@ -23,7 +23,7 @@ const BookList = () => {
 
         {
           state.loading && (
-            <div className="progress">
+            <div className="progress mt-4">
               <div className="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style={{ width: "100%" }}></div>
             </div>
           )

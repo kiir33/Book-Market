@@ -68,7 +68,7 @@ const BookSlice = createSlice({
       const newCartItem = action.payload
       const bookIndex = state.bookList.findIndex(item =>
         item.book.id === newCartItem.book.id)
-      if (bookIndex !== -1 && state.bookList[bookIndex].count > 0) {
+      if (bookIndex >= 0) {
         state.bookList[bookIndex].count -= newCartItem.count
       }
     },

@@ -5,7 +5,7 @@ import { resetStock } from '../Book/BookSlice'
 import CartItem from './CartItem'
 import { removeFromCart } from './CartSlice'
 
-const Cart = ({toggleCart}) => {
+const Cart = ({ toggleCart }) => {
   const dispatch = useDispatch()
   const state = useSelector(state => state.cart)
 
@@ -19,8 +19,8 @@ const Cart = ({toggleCart}) => {
     return convertDollar('$' + totalCost)
   }
 
-  const checkout = () => {
-    if (window.confirm('Do you want to checkout now?')) {
+  const clearCart = () => {
+    if (window.confirm('Do you want to clear cart?')) {
 
       let idList = []
       state.cartList.map(item => {
@@ -32,24 +32,18 @@ const Cart = ({toggleCart}) => {
     }
   }
 
-  if (state.cartList.length === 0) {
-    return (
-      <div className="emptyCart">
-        <h3 className="text-secondary">Cart Empty!</h3>
-      </div>
-    )
-  }
   return (
     <div>
       <div className="row text-light text-center px-4">
-        <i className="fas fs-3 fw-light fa-chevron-right col-1 my-auto" 
-        onClick={toggleCart}/>
+        <i className="fas fs-3 fw-light fa-chevron-right col-1 my-auto"
+          onClick={toggleCart} />
         <p className="col-10 h4 p-2">Cart</p>
         <hr />
 
         <span className="fs-5 fw-bold m-auto col-sm-11 col-md-5"><span className="fw-light">Total amount:</span> Rs. {formatPrice(calculateTotal(state.cartList))}</span>
 
-        <button onClick={checkout}
+        <button onClick={clearCart}
+          disabled={state.cartList.length === 0}
           className="btn btn-outline-light col-sm-11 col-md-5">
           Clear Cart<i className="fas fa-times-circle ms-2" />
         </button>
@@ -57,14 +51,24 @@ const Cart = ({toggleCart}) => {
       </div >
 
 
-      <div className="container py-2">
-        {
-          state.cartList.map(item => (
-            <CartItem key={item.book.id} book={item.book} count={item.count} />
-          ))
-        }
+      {
+        state.cartList.length === 0 ? (
+          <div>
+            <p className="h4 text-secondary text-center col-12 mt-5">
+              <i className="fas fs-2 fa-shopping-cart me-2"></i>
+              Cart Empty!
+            </p>
+          </div>) : (
+          <div className="container py-2">
+            {
+              state.cartList.map(item => (
+                <CartItem key={item.book.id} book={item.book} count={item.count} />
+              ))
+            }
+          </div>
+        )
+      }
 
-      </div>
     </div>
   )
 
