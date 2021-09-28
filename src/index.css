@@ -12,23 +12,41 @@ code {
     monospace;
 }
 
+.app{
+  position: relative;
+}
+
 .cartOverlay{
-  position: absolute;
+  position: fixed;
   z-index: 4;
-  background-color: #05386b;
-  border: 1px solid gray;
-  right: 0;
-  color: #5cdb95;
+  background-color: #21374d;
+  border: 1px solid silver;
+  border-radius: 4px;
+  right: 12px;
   width: 50%;
-  overflow: hidden;
-  min-height: 100%;
-  overflow: hidden;
+  min-height: 60vh;
+  overflow-y: auto;
+}
+
+.emptyCart{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.emptyCart h3{
+  vertical-align: middle;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .blackOverlay{
   width: 100%;
-  min-height: 100%;
-  position: absolute;
+  height: 100%;
+  position: fixed;
   z-index: 3;
   background-color: #161616a1;
 }
@@ -46,4 +64,12 @@ code {
   .cartOverlay{
     width: 80%;
   }
+}
+
+.cartImg{
+  height:auto;
+  aspect-ratio: 1/1;
+  border: 1px solid silver;
+  width:100%;/*maintain aspect ratio*/
+  object-fit: cover;
 }

@@ -12,17 +12,19 @@ function App() {
   }
 
   return (
-    <div style={{ position: 'relative', minHeight: "100%" }}>
+    <div className="app">
       {cartVisible &&
         <div>
           <div className="blackOverlay" onClick={toggleCart}></div>
           <div className="cartOverlay"><Cart /></div>
         </div>
       }
-      <Navbar toggle={toggleCart} />
+      <div>
+        <Navbar toggle={toggleCart} />
 
-      <div className="mt-5">
-        <div className="col-12"><BookList /></div>
+        <div className="mt-4">
+          <div className="col-12"><BookList /></div>
+        </div>
       </div>
 
     </div>

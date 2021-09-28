@@ -32,7 +32,56 @@ const CartItem = ({ book, count }) => {
   }
 
   return (
-    <div className="col-sm-11 col-md-6 p-3" style={{ color: '#212121' }}>
+    <div style={{ position: 'relative', }}>
+      <i className="fas fs-2 fa-times-circle text-danger"
+        style={{
+          position: 'absolute',
+          right: '0px',
+          top: '-8px'
+        }}
+        onClick={remove} />
+
+      <div className="row bg-white rounded-3 mx-2 my-4">
+        <div className="d-flex col-md-3 col-sm-4 ps-0">
+          <img src={book.image} className="cartImg rounded-circle ms-2 my-auto" />
+        </div>
+
+        <div className="col-md-6 col-sm-8">
+          <ul className="list-group list-group-flush px-2">
+            <li className="list-group-item h4">{book.name}</li>
+            <li className="list-group-item">Price: Rs.{formatPrice(convertDollar(book.price))}</li>
+            <li className="list-group-item">
+              <span>Quantity:</span>
+              <div className="d-flex mt-2">
+                <button className="btn btn-sm btn-outline-dark rounded-circle"
+                  style={{ width: '2rem', height: '2rem' }}
+                  onClick={() => changeStock(-1)}>-</button>
+                <span className="h4 mx-4">{count}</span>
+                <button className="btn btn-sm btn-outline-dark rounded-circle me-auto"
+                  style={{ width: '2rem', height: '2rem' }}
+                  disabled={count + 1 > book.stock}
+                  onClick={() => changeStock(1)}>+</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div className="col-md-3 col-sm-12 d-flex bg-light rounded">
+          <p className="m-auto p-2 text-center text-secondary align-middle">
+            <u>Subtotal</u><br />
+            <span className="h5 text-success">
+              Rs.{formatPrice(convertDollar(book.price) * count)}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default CartItem
+
+/* <div className="col-sm-11 col-md-6 p-3" style={{ color: '#212121' }}>
       <div className="card shadow-sm ">
 
         <img src={book.image} alt="" className="card-img-top" style={{ aspectRatio: "2/1" }} />
@@ -63,7 +112,4 @@ const CartItem = ({ book, count }) => {
         </div>
       </div>
     </div>
-  )
-}
-
-export default CartItem
+    */

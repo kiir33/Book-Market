@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 const Navbar = ({ toggle }) => {
   const state = useSelector(state => state.cart)
   return (
-    <nav className="fixed-top navbar bg-light ps-4 pe-4 border">
+    <nav className="fixed-top navbar bg-white ps-4 pe-4 border">
       <span className="textBlue h3 fw-bolder" to="/">Book Market</span>
 
       <div className="navbar-nav ms-auto">

@@ -34,37 +34,33 @@ const Cart = () => {
 
   if (state.cartList.length === 0) {
     return (
-      <div
-        style={{
-          fontSize: '2rem',
-          paddingTop: '12rem',
-          textAlign: 'center',
-        }}>
-        <p className="text-light p-4">Cart Empty!</p>
+      <div className="emptyCart">
+        <h3 className="text-secondary">Cart Empty!</h3>
       </div>
     )
   }
   return (
-    <div className="pt-2">
+    <div className="pt-4">
       <div className="row text-light text-center pt-3 px-4">
+        <p className="h4 p-2">Cart</p><hr />
+
         <span className="fs-5 fw-bold m-auto col-sm-11 col-md-5"><span className="fw-light">Total amount:</span> Rs. {formatPrice(calculateTotal(state.cartList))}</span>
 
         <button onClick={checkout}
-          className="btn btn-light textBlue col-sm-11 col-md-5 px-4">
+          className="btn btn-light textBlue col-sm-11 col-md-5">
           Clear Cart<i className="fas fa-times-circle ms-2" />
         </button>
+        <hr className="mt-3" />
       </div >
 
-      <hr />
 
       <div className="container py-2">
-        <div className="row">
-          {
-            state.cartList.map(item => (
-              <CartItem key={item.book.id} book={item.book} count={item.count} />
-            ))
-          }
-        </div>
+        {
+          state.cartList.map(item => (
+            <CartItem key={item.book.id} book={item.book} count={item.count} />
+          ))
+        }
+
       </div>
     </div>
   )
