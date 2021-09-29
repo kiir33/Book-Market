@@ -42,11 +42,11 @@ const CartItem = ({ book, count }) => {
         onClick={remove} />
 
       <div className="row bg-white rounded-3 mx-2 my-4">
-        <div className="d-flex col-md-3 col-sm-4 ps-0">
-          <img src={book.image} className="cartImg rounded-circle ms-2 my-auto" />
+        <div className="cartImgContainer col-md-3 col-sm-12">
+          <img src={book.image} className="cartImg rounded-circle" />
         </div>
 
-        <div className="col-md-6 col-sm-8">
+        <div className="col-md-6 col-sm-12">
           <ul className="list-group list-group-flush px-2">
             <li className="list-group-item h4">{book.name}</li>
             <li className="list-group-item">Price: Rs.{formatPrice(convertDollar(book.price))}</li>
@@ -66,7 +66,7 @@ const CartItem = ({ book, count }) => {
           </ul>
         </div>
 
-        <div className="col-md-3 col-sm-12 d-flex bg-light rounded">
+        <div className="col-md-3 col-sm-12 d-flex bg-light rounded p-2">
           <p className="m-auto p-2 text-center text-secondary align-middle">
             <u>Subtotal</u><br />
             <span className="h5 text-success">

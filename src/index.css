@@ -75,16 +75,42 @@ code {
   color: #05386b;
 }
 
-@media screen and (max-width: 525px){
-  .cartOverlay{
-    width: 80%;
-  }
+.cartImgContainer{
+  display: flex;
+  align-items: center;
 }
 
 .cartImg{
   height:auto;
   aspect-ratio: 1/1;
+  margin-left: 10px;
   border: 1px solid silver;
   width:100%;/*maintain aspect ratio*/
   object-fit: cover;
+}
+
+@media screen and (max-width: 768px){
+  .cartOverlay{
+    width: 90%;
+  }
+
+}
+
+@media screen and (max-width: 767px){
+  .cartImg{
+    height: auto;
+    width: 20%;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media screen and (max-width: 546px){
+  .cartImg{
+    height: auto;
+    width: 20%;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
